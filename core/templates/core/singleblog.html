@@ -1,0 +1,82 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+       
+      {% endblock %}  
+             
+      {% block title %} {{ post.title }} | postdetail {% endblock %}  
+
+      {% block mainbody %}
+
+       <br> <br>
+      <div class="Single-blog container p-5 prl">
+        <div class="container"> 
+          <div class="post-path p-5">
+             <h6>Home  | {{ post.category }} </h6>
+          </div>
+          <div class="blog-wrapper d-flex justify-between align-center">
+              <div class="post-heading"> 
+                  <p><b> {{ post.status }} </b> <span class="post-date"> &nbsp; {{ post.created_on }}</span></p>
+                  <h1> {{ post.title }} </h1>
+                  <p> {{ post.description|slice:":255" | safe }} </p>
+                  <ul>
+                     <li>
+                      {% if user.profile.profile_pic %}
+                          <img src="{{ user.profile.profile_pic.url }}" class="border-50" height="80px" width="80px">
+                        {% else %}  
+                          <img src="{% static 'core/images/user.png' %}" class="border-50" height="80px" width="80px">
+                      {% endif %}
+                        </li>
+
+                     <li>
+                        <h6 class="author-name"> {{ post.author }} </h6>
+                        <span class="author-designation"> {{ post.created_on }} </span>
+                     </li>
+                  </ul>
+              </div>
+
+              <div class="blog-image">
+                  <img src="{{ post.feature_image.url }}">
+              </div>
+            </div>  
+          </div>
+
+          <div class="blog-brief-content">
+             <span>{{ post.description | safe }}</span>
+            
+             <div class="blog-images d-flex gap-20 justify-center align-center p-5">
+                <img src="{% static 'core/images/post/wid-1.jpg' %}" class="img-fluid">
+                <img src="{% static 'core/images/post/tren-sm-1.jpg' %}" class="img-fluid">
+                <img src="{% static 'core/images/post/wid-3.jpg' %}" class="img-fluid">
+                <img src="{% static 'core/images/post/wid-2.jpg' %}" class="img-fluid">
+             </div>
+          
+          </div>
+
+
+
+          <h3>Where can I get some?</h3>
+              <p> 
+                "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+              </p>
+              <a href="javascript:history.go(-1)" class=""><i class="fas fa-light fa-arrow-left"></i> Go back</a>
+      </div>
+
+        
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

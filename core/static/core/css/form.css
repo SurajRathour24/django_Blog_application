@@ -1,0 +1,93 @@
+
+.login_form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+}
+.login_form input {
+    width: 100%;
+    margin: 10px  0px;
+    padding: 7px;
+}
+.text-center{
+    text-align: center;
+}
+
+.login_form_bg {
+    /* background: repeating-linear-gradient(45deg, black, transparent 100px); */
+    padding: 110px 100px;
+    border-radius: 15px;
+}
+.login_form input {
+    width: 100%;
+    margin: 0px  0px;
+    padding: 40px 0px;
+    border: none;
+    border-bottom: 1px solid grey;
+    background: no-repeat;
+    transition: .3s;
+    padding-bottom: 10px;
+    color: #ffff;
+}
+.btn-primary{
+    margin-top: 20px;
+}
+input{
+    transition: .3s;
+}
+
+section.login_form input:focus-visible {
+    outline: 0px !important;
+    color: #fff;
+    transition: .2s;
+}
+/* section.login_form input:focus-visible::placeholder {
+    transform: translateY(-20px);
+    transition: .2s;
+} */
+.btn-primary {
+    margin-top: 20px;
+    display: inherit;
+}
+.position-realtive{
+    position: relative;
+    transition: .3s;
+}
+label {
+    position: absolute;
+    left: 0;
+    /* bottom: 3px; */
+    transition: .3s;
+    pointer-events: none;
+    transform: translateY(45px);
+}
+input:focus + label, input:not(:placeholder-shown) + label{
+    transform: translateY(20px);
+    transition: .3s;
+} 
+input:focus-visible {
+    color: #fff !important;
+}
+
+/* input:focus-visible ~ label {
+    transform: translateY(-30px);
+} */
+input::placeholder{
+    color: transparent;
+}
+
+i.menuIcon.material-icons {
+    padding-top: 0;
+    top: 10px;
+}
+
+@media screen and (width <= 600px){
+    .login_form{
+        width: 100%;
+    }
+    .login_form_bg {
+        padding: 30px 20px;
+    }
+}

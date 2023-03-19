@@ -1,0 +1,102 @@
+{% load static %}
+<nav>
+    <div class="nav-wrapper">
+        <div class="d-flex justify-center align-center gap-19 p-2">
+            <div class="nav-items d-flex justify-center align-center">
+                <img src="{% static 'core/images/newlogo.png' %} " class="img-fluid">
+                
+                <ul style="padding-left:30px;">
+                    <li><a href="{% url 'home' %}" class="">Home</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                  {% if not request.user.is_authenticated %}  
+                    <li><a href="{% url 'signin' %}">Sign In</a></li>
+                    <li><a href="{% url 'registration' %}">Sign Up</a></li>
+                  {% elif request.user.is_staff %}  
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                  {% elif request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                  {% endif %}  
+                </ul>
+            </div>
+            <div class="sign-up-area">
+                <ul class="d-flex justify-center align-center social-icons">
+                    <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-facebook-f text-dark"></i></a></li>
+                    <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-instagram text-dark"></i></a></li>
+                    <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-twitter text-dark"></i></a></li>
+                    <div class="search-box-menu">
+                        <span><i class="fas fa-regular fa-magnifying-glass search-box-menu"></i></span>
+
+
+                        <span></a>
+                            <ul class="menu p-0 m-0">
+                                   <div class="sidee-menu-logo">
+                                    <img src="{% static "core/images/newlogo.png" %} ">
+                                   </div>
+                                    <li><a class="menuItem" href="{% url 'home' %}">Home</a></li>
+                                    <li><a class="menuItem" href="{% url 'blog' %}">Blog</a></li>
+                                    <li><a class="menuItem" href="{% url 'about' %}">About Us</a></li>
+                                    <li><a class="menuItem" href="#trending">Trending</a></li>
+                                    <li><a class="menuItem" href="{% url 'registration' %}">Sign In</a></li>
+                                    <li><a class="menuItem" href="{% url 'dashboard' %}">Dashboard</a></li>
+                                    <li><a class="menuItem" href="{% url 'logout' %}">logout</a></li>
+
+                                    <ul class="d-flex justify-center align-center social-icons">
+                                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-facebook-f text-dark"></i></a></li>
+                                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-instagram text-dark"></i></a></li>
+                                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-twitter text-dark"></i></a></li>
+                                        <li class="text-decoration-none"><a href="#"><i class="fas fa-thin fa-envelope text-dark"></i></a></li>
+                                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-linkedin-in text-dark"></i></a></li>
+                                        <br><br>
+                                    </ul>
+                                    <p>© 2022 MD Blogs</p>  
+                            </ul>
+
+                            <button class="hamburger">
+                                    <!-- material icons https://material.io/resources/icons/ -->
+                                    <i class="menuIcon material-icons"><i class="fas fa-light fa-bars"></i></i>
+                                    <i class="closeIcon material-icons"><i class="fas fa-light fa-xmark"></i></i>
+                            </button>
+                        </span>
+                    
+                    
+                    </div>
+                </ul>   
+            </div>
+        </div>
+    </div>
+</nav>
+<script>
+
+
+      /*********************************mobile menu********************************/
+
+  const menu = document.querySelector(".menu");
+  const menuItems = document.querySelectorAll(".menuItem");
+  const hamburger= document.querySelector(".hamburger");
+  const closeIcon= document.querySelector(".closeIcon");
+  const menuIcon = document.querySelector(".menuIcon");
+  
+  function toggleMenu() {
+    if (menu.classList.contains("showMenu")) {
+      menu.classList.remove("showMenu");
+      closeIcon.style.display = "none";
+      menuIcon.style.display = "block";
+    } else {
+      menu.classList.add("showMenu");
+      closeIcon.style.display = "block";
+      menuIcon.style.display = "none";
+    }
+  }
+  
+  hamburger.addEventListener("click", toggleMenu);
+  
+  
+  menuItems.forEach( 
+    function(menuItem) { 
+      menuItem.addEventListener("click", toggleMenu);
+    }
+  )
+</script>

@@ -1,0 +1,159 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+       
+      {% endblock %}  
+             
+      {% block title %} User profile {% endblock %}  
+
+      {% block mainbody %}
+
+       
+      <!----------------------------------------User profile card-------------------------------------->            
+<section class="user-profile-card">
+    
+    <div class="container">
+        <h2 class="text-align-center">Profile</h2>
+       <div class="profile-card-wrapper d-flex gap-14">
+
+           <div class="profile-left-box text-align-center">
+                <div class="sidenav">
+                    <div class="profile">
+                        {% if user.profile.profile_pic %}
+                          <img src="{{ user.profile.profile_pic.url }}" class="border-10" height="100px" width="100px">
+                        {% else %}  
+                          <img src="{% static 'core/images/user.png' %}" class="border-10" height="100px" width="100px">
+                      {% endif %}
+
+                        <div class="name">
+                            {{ request.user.first_name }} 
+                        </div>
+                        <div class="job">
+                            Web Developer
+                        </div>
+                    </div>
+
+                    <div class="sidenav-url pt-2">
+                        <div class="url">
+                            <a href="profile.html" class="active">Profile</a>
+                            <hr align="center">
+                        </div>
+                        <div class="url">
+                            <a href="#settings">Settings</a>
+                            <hr align="center">
+                        </div>
+                    </div>
+                </div>
+           </div>
+
+           <div class="user-info">
+                <div class="main">
+                
+                <ul class="d-flex justify-between">
+                  <li><h2>IDENTITY</h2></li>
+                  <li><a href="{% url 'editprofile' %}"><h2><i class="fas fa-light fa-pen-to-square"></i></h2></a></li>
+                </ul>
+                <div class="card">
+                    <div class="card-body">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>:</td>
+                                    <td>{{ request.user.first_name }} &nbsp; {{ request.user.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>:</td>
+                                    <td>{{ request.user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>:</td>
+                                    <td>Bali, Indonesia</td>
+                                </tr>
+                                <tr>
+                                    <td>Hobbies</td>
+                                    <td>:</td>
+                                    <td>Diving, Reading Book</td>
+                                </tr>
+                                <tr>
+                                    <td>Job</td>
+                                    <td>:</td>
+                                    <td>Web Developer</td>
+                                </tr>
+                                <tr>
+                                    <td>Skill</td>
+                                    <td>:</td>
+                                    <td>PHP, HTML, CSS, Java</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>SOCIAL MEDIA</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="social-media">
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-facebook fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-instagram fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-invision fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-whatsapp fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+                            <span class="fa-stack fa-sm">
+                                <i class="fas fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fab fa-snapchat fa-stack-1x fa-inverse" aria-hidden="true"></i>
+                            </span>
+<br><br>
+                            <a href="{% url 'dashboard' %}"> <i class="fas fa-thin fa-arrow-left"></i> Go Back</a>
+                        </div>
+                    </div>
+                </div>
+
+        
+                    </div>
+                </div>
+           </div>
+
+       </div>
+    </div>
+</section>
+
+
+        
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

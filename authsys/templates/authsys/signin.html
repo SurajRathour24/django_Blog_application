@@ -1,0 +1,132 @@
+
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+        <style>
+
+          section.login_form {
+            padding-top: 10%;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .login_form_bg {
+          width: 50%;
+          margin: 0 auto;
+          color: #fff;
+          background: var(--bg-gradient);
+          padding: 100px 0px;
+      }
+      form {
+        width: 20%;
+        margin: 0 auto;
+    }
+    label {
+      display: block;
+      text-align: left;
+  }
+        </style>
+      {% endblock %}  
+             
+
+      {% block mainbody %}
+
+       
+      
+
+
+        <section class="login_form text-align-center position-realtive" style="">
+          <div class="container form-design"> 
+          <div class="login_form_bg">
+              <h2 class="text-center text-white">Sign In</h2>
+              <form method="POST" action="" novalidate>
+                      {% csrf_token %}
+           
+                    {% for fr in form %}
+
+                        <h6 style="text-align:left;">{{ fr.label_tag  }}</h6> {{ fr }} {{ fr.errors |striptags }} <br>
+
+                    {% endfor %}
+
+                    {% if form.non_field_errors %}
+                      <div class="non-field-errors">
+                        {% for err in form.non_field_errors %}
+                          <p class="form-error">{{ err }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+
+
+                    <button type="submit" class="btn-primary text-align-left d-block cursor-pointer" style="background:#000; color:#fff; padding:8px 20px;">
+                      Submit
+                  </button>
+                    </div>
+                    
+                </form>
+              {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+              {% endif %}
+
+
+
+              {% if form.non_field_errors %}
+                <div class="non-field-errors">
+                  {% for err in form.non_field_errors %}
+                    <p class="form-error">{{ err }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+
+
+
+            </div>
+          </div>  
+        </section>
+
+        
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

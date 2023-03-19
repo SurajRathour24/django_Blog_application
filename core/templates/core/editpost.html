@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+
+       
+      {% endblock %}  
+      {% block title %} Edit blog {% endblock %}  
+
+      {% block mainbody %}
+
+    <div class="container">   
+      <br><br><br>
+       <form method="POST" action="" class="p-50" enctype="multipart/form-data">
+        <br><br><br>
+        {% csrf_token %}
+          {{ fr.media }}
+          {% for fr in form %}
+
+                      {{ fr.label_tag  }} {{ fr }} {{ fr.errors |striptags }} <br><br>
+
+                    {% endfor %}
+         <input type="submit" value="submit">
+       </form>
+      
+    </div>
+
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+ 
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+
+       <style>
+         .content p:first-of-type {
+            display: none;
+        }
+
+        .content p{
+         padding: 0px;
+         margin: 0px;
+     }
+
+       </style>
+
+      {% endblock %}  
+             
+      {% block title %} Blogs | All Blogs {% endblock %}  
+      {% block mainbody %}
+
+       
+
+
+      <div class="container p-5">
+
+        <h1 class="heading text-align-center pt-4">Explore Blogs</h1>
+        <div class="box-container">
+           
+         {% for blog in blogs %}
+           <div class="box">
+              <div class="image">
+                 <img src="{{ blog.feature_image.url }}" alt="">
+              </div>
+              <div class="content text-align-center">
+                 <h3>{{ blog.title }}</h3>
+                 <p class=""> {{ blog.description | safe | slice:':50' }} </p>
+                 <a href="{% url 'blogdetail' blog.slug %}" class="btn">Read more</a>
+                 <div class="icons">
+                    <span> <i class="fas fa-calendar"></i> {{ blog.created_on }} </span>
+                    <span> <i class="fas fa-user"></i>By {{ blog.author }} </span>
+                 </div>
+              </div>
+           </div>
+         {% endfor %}
+
+        </div>
+     <br><br>
+        <div id="load-more" class="bg-gt text-white"> load more </div>
+     
+     </div>
+
+
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+  <script>
+
+   let loadMoreBtn = document.querySelector('#load-more');
+   let currentItem = 3;
+   
+   loadMoreBtn.onclick = () =>{
+      let boxes = [...document.querySelectorAll('.container .box-container .box')];
+      for (var i = currentItem; i < currentItem + 3; i++){
+         boxes[i].style.display = 'inline-block';
+      }
+      currentItem += 3;
+   
+      if(currentItem >= boxes.length){
+         loadMoreBtn.style.display = 'none';
+      }
+   };
+   
+</script>
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

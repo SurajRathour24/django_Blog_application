@@ -1,0 +1,133 @@
+
+
+
+
+
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+
+        <style>
+
+          section.signup_form {
+            padding-top: 10%;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .signup_form_bg {
+          width: 50%;
+          margin: 0 auto;
+          color: #fff;
+          background: var(--bg-gradient);
+          padding: 100px 0px;
+      }
+      form {
+        width: 50%;
+        margin: 0 auto;
+    }
+    label {
+      display: block;
+      text-align: left;
+      color:#fff;
+  }
+  .signup_form_bg input {
+    display: block;
+    width: 100%;
+}
+        </style>
+       
+      {% endblock %}  
+
+      {% block title %} user registration {% endblock %}  
+
+      {% block mainbody %}
+
+       
+      
+
+
+        <section class="signup_form">
+          <div class="container text-align-center">
+              <div class="signup_form_bg">
+              <h2 class="text-center text-white">User Resgistration</h2>
+
+                <form method="POST" action="" novalidate>
+                      {% csrf_token %}
+           
+                    {% for fr in form %}
+
+                        <h6 style="text-align:left;">{{ fr.label_tag  }}</h6> {{ fr }} {{ fr.errors |striptags }} <br>
+
+                    {% endfor %}
+
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% if form.non_field_errors %}
+                      <div class="non-field-errors">
+                        {% for err in form.non_field_errors %}
+                          <p class="form-error">{{ err }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+
+
+                    <button type="submit" class="btn-primary text-align-left d-block cursor-pointer" style="background:#000; color:#fff; padding:8px 20px;">
+                      Submit
+                  </button>
+                    </div>
+                    
+                </form>
+
+              </div>
+            </div>  
+        </section>
+
+        
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

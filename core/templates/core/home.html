@@ -1,0 +1,813 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+        
+        {% block title %} MD blogs {% endblock %}  
+        
+      <header class="h-85">
+        <div class="container">    
+
+            <main>
+               <div class="main-content-banner d-flex justify-center align-center d-flex-sm">
+                   <div class="left-content-banner">
+                      <div class="static-text"><h1>Publishing Platform for Professional</h1></div>
+                        <ul class="dynamic-text">
+                            <li><h1>Blogger</h1></li>
+                            <li><h1>Creator</h1></li>
+                        </ul>
+                        <p class="banner-text"> Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                        <br><a href="#" class="bg-gt banner-text">Read More</a>
+                   </div>
+                   <div class="right-content-banner">
+                      <video width="650px" height="650px" autoplay muted loop>
+         
+                    <source src="{% static 'core/video/bannerrt.mp4' %}"
+                        type="video/mp4">
+                    </video>
+                   </div>
+               </div>
+            </main>
+        </div>   
+      </header>   
+       
+      {% endblock %}  
+             
+
+      {% block mainbody %}
+  <!------------------------------------------------Header---------------------------------->
+
+
+            <!------------------------------------------------featured-section------------------------------------>
+    <section>
+        <div class="container">
+          
+            <div class="feature-box d-flex justify-center d-sm-block">
+             {% for t in tp  %}   
+              <a href="{% url 'blogdetail' t.slug %}">   
+                <div class="left-image-box bg-property" style="background-image: url({{ t.feature_image.url }}) ";>
+                    <div class="post-content">
+                        <span class="blog-category bg-gt-sm">{{ t.category }}</span>
+                        <h2>{{ t.title }}</h2>
+                        <ul class="author-name p-0">
+                            <li>{{ t.author }}</li>
+                            <li> . </li>
+                            <li> {{ t.created_on }} </li>
+                        </ul> 
+                    </div>
+              </a>  
+             {% endfor %} 
+                </div>
+             
+               
+
+
+                    <!-------------------------------------Recent post sidebar start------------------------------------>
+
+                <div class="sidebar-rec-post solid-box-border">
+                            <div class="warpper">
+                                    <input class="radio" id="one" name="group" type="radio" checked>
+                                    <input class="radio" id="two" name="group" type="radio">
+                                    <input class="radio" id="three" name="group" type="radio">
+                                    <div class="tabs text-align-center">
+                                    <label class="tab" id="one-tab" for="one" class="bg-gt">Recent</label>
+                                    <label class="tab" id="two-tab" for="two">Popular</label>
+                            </div>
+
+
+                        <div class="panels">
+                        <div class="panel" id="one-panel">
+                            {% for post in pt %}
+                                {% if forloop.counter <= 4 %}
+                                        <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-center align-start gap-20">
+                                                            <div class="thumb circle">
+                                                                <a href="{% url 'blogdetail' post.slug %}">
+                                                                    <div class="inner">
+                                                                        <img src="{{ post.blog_image.url }}" alt="" class="border-50" height="70px" width="70px">
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="post-details clearfix">
+                                                                <h4 class="post-title m-0">
+                                                                    <a href="{% url 'blogdetail' post.slug %}">{{ post.title|slice:":42" }}</a>
+                                                                </h4>
+                                                                <ul class="meta list-inline p-0 m-0">
+                                                                    <li class="list-inline-item">{{ post.created_on }}</li>
+                                                                </ul>
+                                                            </div>
+                                        </div>
+                                {% endif %}        
+
+                            {% endfor %}    
+
+
+                            </div>    
+
+                    
+
+                        <div class="panel" id="two-panel">
+                            {{ pp.title }}
+                            {% for p in pp %}
+                                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-center align-start gap-20">
+                                                        <div class="thumb circle">
+                                                            <a href="{% url 'blogdetail' p.id %}">
+                                                                <div class="inner">
+                                                                    <img src="{{ p.blog_image.url }}" alt="" class="border-50" height="70px" width="70px">
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-details clearfix">
+                                                            <h4 class="post-title m-0">
+                                                                <a href="{% url 'blogdetail' p.slug %}">{{ p.title|slice:":50" }}</a>
+                                                            </h4>
+                                                            <ul class="meta list-inline p-0 m-0">
+                                                                <li class="list-inline-item">{{ p.created_on }}</li>
+                                                            </ul>
+                                                        </div>
+                                    </div>      
+
+                            {% endfor %}   
+
+                        </div>
+                        </div>
+
+                </div>
+             <!----------------------------------------------Recent Post sidebar end-------------------------------->
+            </div>
+        </div>
+    </section>
+
+<!---------------------------------grid-container content start------------------------------>
+<section class="editor-pic section2">
+    <div class="container">
+        <div class="content-grid-container d-grid">
+           <div class="left-grid-box">
+               <div class="feature-box">
+               <h3>Editor's Pack </h3>
+                  <div class="blog-grid-box-wrapper d-flex justify-center solid-box-border gap-20 d-sm-block">
+
+               
+                <!--------------------------Inner left section start------------------------>  
+                    <div class="left-grid-box-1">
+                        <div class="left-image-box2 p-0">
+                            <ul class="blog-list-img p-0">
+                                <li class="position-relative"><img src="{% static 'core/images/post/editors-lg.jpg' %}" class="border-15">
+                                <a href="#" class="bg-gt-xsm img-top-link">Lifestyle</a>
+                                <div class="custom-icon-design"> <a href="#" class="icon-bg-round"><i class="fas fa-thin fa-image"></i></a></div>
+                                </li>
+                                <li><div class="blog-content-box p-2">
+                                  <a href="#">
+                                    <ul class="author-name p-0">
+                                    <li>Tech Blogger</li>
+                                    <li> . </li>
+                                    <li>24 Jan 2001 
+                                  </a>    
+                                </li>
+                            </ul> 
+                                <h5>3 must visit Place in switzerland</h5>
+                                <p class="blog-short-description">
+                                This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quasi.
+                                </p>
+                            </div></li>
+                            </ul>
+                        </div>
+                    </div>
+                <!--------------------------Inner left section end------------------------>
+
+
+        <!-------------------------sidebar of first blog section------------------------------>
+        <div class="sidebar-rec-post">
+           <!--------------------------------------------POst 1---------------------------------------------->         
+                    <div class="post post-list-sm border-bottom position-relative d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">A Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">B Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">C Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">D Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+        </div>
+                   <!----------------------------------------------Post end---------------------------------------------->
+        
+
+        <!-------------------------Right sidebar end ---------------------------->
+       </div>  
+    </div>
+
+    <!----------------------------------------Trending blogs---------------------------->
+        <div class="Trending-blogs p-5" id="trending">
+            <h3>Trending</h3>
+                  <div class="blog-grid-box-wrapper d-flex justify-center solid-box-border gap-20 d-sm-block">
+
+                <!-----------------Left blog box------------------------>  
+                    <div class="left-grid-box-1">
+                        <div class="left-image-box2 p-0">
+                            <ul class="blog-list-img p-0">
+                                <li class="position-relative"><img src="{% static 'core/images/post/tren-lg-1.jpg' %}" class="border-15">
+                                <a href="#" class="bg-gt-xsm img-top-link">Business</a>
+                                <div class="custom-icon-design"> <a href="#" class="icon-bg-round"><i class="fas fa-thin fa-money-bill"></i></a></div>
+                                </li>
+                                <li><div class="blog-content-box p-2">
+                                  <a href="#">
+                                    <ul class="author-name p-0">
+                                    <li>Tech Blogger</li>
+                                    <li> . </li>
+                                    <li>24 Jan 2001 
+                                  </a>  
+                                    </li>
+                            </ul> 
+                                <h5>3 must visit Place in switzerland</h5>
+                                <p class="blog-short-description">
+                                This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quasi.
+                                </p>
+                            </div></li>
+                            </ul>
+
+                            <div class="blog-short-list">
+                              <ul class="p-0">
+                               <li>
+                                <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-between align-start gap-15">
+                                  <div class="thumb circle">
+                                    <a href="#">
+                                        <div class="inner">
+                                            <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                        </div>
+                                    </a>
+                                   </div>
+                                    <div class="post-details clearfix">
+                                      <a href="#">
+                                        <h4 class="post-title m-0">
+                                            <a href="#">IPL 2021 to resume in sept 3rd week in UAE</a>
+                                        </h4>
+                                        <ul class="meta list-inline p-0 m-0">
+                                            <li class="list-inline-item">24 May 2021</li>
+                                        </ul>
+                                      </a>  
+                                    </div>
+                                </div>
+
+                               </li> 
+
+                               <li>
+                                <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-between align-start gap-15">
+                                  <div class="thumb circle">
+                                    <a href="#">
+                                        <div class="inner">
+                                            <img src="{% static 'core/images/post/tabs-1.jpg' %}" alt="" class="border-15">
+                                        </div>
+                                    </a>
+                                   </div>
+                                    <div class="post-details clearfix">
+                                      <a href="#">
+                                        <h4 class="post-title m-0">
+                                            <a href="#">IPL 2021 to resume in sept 3rd week in UAE</a>
+                                        </h4>
+                                        <ul class="meta list-inline p-0 m-0">
+                                            <li class="list-inline-item">24 May 2021</li>
+                                        </ul>
+                                      </a>  
+                                    </div>
+                                </div>
+
+                               </li> 
+                              </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                <!-----------------Left blog end ---------------------->     
+
+          <div class="sidebar-popular-post">
+
+           <!--------------------------------------------POst 1---------------------------------------------->         
+                    <div class="left-grid-box-1">
+                        <div class="left-image-box2 p-0">
+                            <ul class="blog-list-img p-0">
+                                <li class="position-relative"><img src="{% static 'core/images/post/tren-lg-2.jpg' %}" class="border-15">
+                                <a href="#" class="bg-gt-xsm img-top-link">Inspiration</a>
+                                <div class="custom-icon-design"> <a href="#" class="icon-bg-round"><i class="fas fa-light fa-headphones"></i></a></div>
+                                </li>
+                                <li><div class="blog-content-box p-2">
+                                    <ul class="author-name p-0">
+                                    <li>Tech Blogger</li>
+                                    <li> . </li>
+                                    <li>24 Jan 2001 </li>
+                            </ul> 
+                                <h5>3 must visit Place in switzerland</h5>
+                                <p class="blog-short-description">
+                                This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, quasi.
+                                </p>
+                            </div></li>
+                            </ul>
+                            <div class="blog-short-list">
+                              <ul class="p-0">
+                               <li>
+                                <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-between align-start gap-15">
+                                  <div class="thumb circle">
+                                    <a href="#">
+                                        <div class="inner">
+                                            <img src="{% static 'core/images/post/tabs-3.jpg' %}" alt="" class="border-15">
+                                        </div>
+                                    </a>
+                                   </div>
+                                    <div class="post-details clearfix">
+                                        <h4 class="post-title m-0">
+                                            <a href="#">IPL 2021 to resume in sept 3rd week in UAE</a>
+                                        </h4>
+                                        <ul class="meta list-inline p-0 m-0">
+                                            <li class="list-inline-item">24 May 2021</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                               </li> 
+
+                               <li>
+                                <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-between align-start gap-15">
+                                  <div class="thumb circle">
+                                    <a href="#">
+                                        <div class="inner">
+                                            <img src="{% static 'core/images/post/tabs-2.jpg' %}" alt="" class="border-15">
+                                        </div>
+                                    </a>
+                                   </div>
+                                    <div class="post-details clearfix">
+                                        <h4 class="post-title m-0">
+                                            <a href="#">IPL 2021 to resume in sept 3rd week in UAE</a>
+                                        </h4>
+                                        <ul class="meta list-inline p-0 m-0">
+                                            <li class="list-inline-item">24 May 2021</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                               </li> 
+                              </ul>
+
+                            </div>
+                        </div>
+                    </div>
+            <!---------------------Right card trending post------------------------>        
+                 </div>  
+        
+            </div>
+        </div>
+
+
+
+<!------------------------------Blogs slider ---------------------------------------->
+
+    <div class="Blog-slider">
+            <h3>Inspiration</h3>
+                    <div class="main">
+                        <div class="slider slider-for">
+                            
+                        </div>
+                        <div class="slider slider-nav">
+                            <div>
+                            
+                                <div class="blog-slide-1 bg-property-slider" style="background-image: url({% static 'core/images/post/latest-2.jpg' %});">
+                                    <div class="slide-post-content">
+                                        <span class="blog-category bg-gt-sm">Finance</span>
+                                        <h4>3 Things to avoid while investing in stock market as a beginner</h4>
+                                        <ul class="author-name m-0 p-0">
+                                            <li>Tech Blogger</li>
+                                            <li> . </li>
+                                            <li>24 Jan 2001 </li>
+                                        </ul> 
+                                    </div>
+                                 </div>
+                            
+                            </div>
+                            <div>
+                            
+                            <div class="blog-slide-1 bg-property-slider" style="background-image: url({% static 'core/images/post/latest-1.jpg' %});">
+                                    <div class="slide-post-content">
+                                        <span class="blog-category bg-gt-sm">Finance</span>
+                                        <h4>3 Things to avoid while investing in stock market as a beginner</h4>
+                                        <ul class="author-name m-0 p-0">
+                                            <li>Tech Blogger</li>
+                                            <li> . </li>
+                                            <li>24 Jan 2001 </li>
+                                        </ul> 
+                                    </div>
+                                 </div>
+                            
+                            </div>
+                            <div>
+                            
+                               <div class="blog-slide-1 bg-property-slider" style="background-image: url({% static 'core/images/post/latest-3.jpg' %});">
+                                    <div class="slide-post-content">
+                                        <span class="blog-category bg-gt-sm">Finance</span>
+                                        <h4>3 Things to avoid while investing in stock market as a beginner</h4>
+                                        <ul class="author-name m-0 p-0">
+                                            <li>Tech Blogger</li>
+                                            <li> . </li>
+                                            <li>24 Jan 2001 </li>
+                                        </ul> 
+                                    </div>
+                                 </div>
+                            
+                            </div>
+                            <div>
+                            
+                               <div class="blog-slide-1 bg-property-slider" style="background-image: url({% static 'core/images/post/latest-4.jpg' %});">
+                                    <div class="slide-post-content">
+                                        <span class="blog-category bg-gt-sm">Finance</span>
+                                        <h4>3 Things to avoid while investing in stock market as a beginner</h4>
+                                        <ul class="author-name m-0 p-0">
+                                            <li>Tech Blogger</li>
+                                            <li> . </li>
+                                            <li>24 Jan 2001 </li>
+                                        </ul> 
+                                    </div>
+                                 </div>
+
+                            </div>
+                            <div>
+                            
+                              <div class="blog-slide-1 bg-property-slider" style="background-image: url('{% static 'core/images/post/latest-1.jpg' %}');">
+                                    <div class="slide-post-content">
+                                        <span class="blog-category bg-gt-sm">Finance</span>
+                                        <h4>3 Things to avoid while investing in stocks market as a beginner</h4>
+                                        <ul class="author-name m-0 p-0">
+                                            <li>Tech Blogger</li>
+                                            <li> . </li>
+                                            <li>24 Jan 2001 </li>
+                                        </ul> 
+                                    </div>
+                              </div>
+                            
+                            
+                            </div>
+                        </div>
+                    </div>
+
+    </div>
+
+
+<!----------------------------------Blog slider end -------------------------------->
+
+           </div>
+        <!---------------------------Right sidebar ---------------------------->
+
+    <div class="right-sidebar">
+             <!----------------------Side bar box 1---------------------------->
+               <div class="right-sidebar-box1 solid-box-border text-align-center">
+                   <img src="{% static 'core/images/newlogo.png' %}">
+                   <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores tempora accusantium culpa deleniti nesciunt repellat quisquam quos vero. Esse itaque est optio nostrum porro quisquam nihil reprehenderit fugiat enim non.</p>
+
+                   <ul class="d-flex justify-center align-center social-icons">
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-facebook-f text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-instagram text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-twitter text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-thin fa-envelope text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-linkedin-in text-dark"></i></a></li>
+                    </ul>   
+               </div>
+
+            <!----------------Sidebar box2------------------------------------------------>
+        
+                      <div class="sidebar-popular-post solid-box-border mt-30">
+                    <div class="text-align-center">
+                        <div class="populated-btn">
+                            <h3 class="">Popular Post</h3>                        
+                        </div>
+                    </div>
+
+                <!--------------------------------------------POst 1---------------------------------------------->         
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-5.jpg' %}" alt="" class="border-50">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-2.jpg' %}" alt="" class="border-50">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-3.jpg' %}" alt="" class="border-50">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>
+
+                    <div class="post post-list-sm border-bottom position-relative mt-40 d-flex justify-evenly align-start gap-20">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <img src="{% static 'core/images/post/tabs-2.jpg' %}" alt="" class="border-50">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <h4 class="post-title m-0">
+                                    <a href="#">Bitcoin price raise after sudden fall</a>
+                                </h4>
+                                <ul class="meta list-inline p-0 m-0">
+                                    <li class="list-inline-item">24 May 2021</li>
+                                </ul>
+                            </div>
+                    </div>           
+            </div>
+
+             <!----------------------------------------------Right sidebar Choose topic-------------------->
+
+                <div class="right-sidebar-box1 solid-box-border text-align-center mt-30">
+                   <h3>Explore Topics</h3>
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Fashion</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(5)</span>
+                            </div>
+                    </div> 
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Travel</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(9)</span>
+                            </div>
+                    </div> 
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Trending</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(2)</span>
+                            </div>
+                    </div> 
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Food</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(6)</span>
+                            </div>
+                    </div> 
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Technology</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(4)</span>
+                            </div>
+                    </div> 
+
+                    <div class="post post-list-sm position-relative mt-15 d-flex justify-between align-center gap-30 solid-border-bottom">
+                            <div class="thumb circle">
+                                <a href="#">
+                                    <div class="inner">
+                                        <h6> <i class="fa-solid fa-chevron-right"></i> &nbsp; &nbsp; Latest</h6>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="post-details clearfix">
+                                <span class="post-counter">(3)</span>
+                            </div>
+                    </div> 
+
+                </div>
+
+            <!----------------------Explore topics end------------------------------------------------>
+
+
+
+
+
+            <!-----------------------------------Newsletter section start------------------------------>
+            <div class="right-sidebar-box1 solid-box-border text-align-center mt-30">
+                   <h3>Newsletter</h3>
+                  
+                   <p>Join 50,000 subscribers</p>
+
+                   <form method="post" action="" class="form-custom-design">
+                       <input type="text" placeholder="Your Email">
+                       <button type="submit" class="bg-gt-lg">Sign Up</button>
+                   </form>
+                    
+                     <br>
+                   <ul class="d-flex justify-center align-center social-icons p-0">
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-facebook-f text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-instagram text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-twitter text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-thin fa-envelope text-dark"></i></a></li>
+                        <li class="text-decoration-none"><a href="#"><i class="fas fa-brands fa-linkedin-in text-dark"></i></a></li>
+                    </ul>   
+                </div>
+
+           <!-------------------------------Newsletter section end------------------------------------>     
+    <!-----------------Right sidebar end------------------------>
+
+
+        </div>
+    </div>
+</section>
+
+
+<!-------------------------------Latest Post Cards------------------------------------>
+
+    <section class="">
+        <div class="container">
+        <h2>Latest Post</h2>
+            <div class="latest-post d-flex justify-between align-center gap-40 d-sm-block">
+              
+                <div class="blog-box1 post-card">
+                    <div class="blog-post-img">
+                        <img src="{% static 'core/images/post/insp-1.jpg' %}">
+                    </div>
+                    <div class="blog-post-content">
+                        <span class="post-date">10 November 2022</span>
+                        <h4>This is Lorem ipsum dolor sit amet consectetur</h4>
+                        <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores tempora accusantium culpa deleniti nesciunt repellat...</p>
+                    </div>
+                </div>
+
+                <div class="blog-box2 post-card">
+                    <div class="blog-post-img">
+                        <img src="{% static 'core/images/post/insp-2.jpg' %}">
+                    </div>
+                    <div class="blog-post-content">
+                        <span class="post-date">10 November 2022</span>
+                        <h4>This is Lorem ipsum dolor sit amet consectetur</h4>
+                        <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores tempora accusantium culpa deleniti nesciunt repellat...</p>
+                    </div>
+                </div>
+
+                <div class="blog-box3 post-card">
+                     <div class="blog-post-img">
+                        <img src="{% static 'core/images/post/insp-3.jpg' %}">
+                    </div>
+                    <div class="blog-post-content">
+                        <span class="post-date">10 November 2022</span>
+                        <h4>This is Lorem ipsum dolor sit amet consectetur</h4>
+                        <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores tempora accusantium culpa deleniti nesciunt repellat ...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock mainbody %}
+
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+  <script>
+
+   let loadMoreBtn = document.querySelector('#load-more');
+   let currentItem = 3;
+   
+   loadMoreBtn.onclick = () =>{
+      let boxes = [...document.querySelectorAll('.container .box-container .box')];
+      for (var i = currentItem; i < currentItem + 3; i++){
+         boxes[i].style.display = 'inline-block';
+      }
+      currentItem += 3;
+   
+      if(currentItem >= boxes.length){
+         loadMoreBtn.style.display = 'none';
+      }
+   };
+   
+</script>
+
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+
+       
+      {% endblock %}  
+      {% block title %} Add blog {% endblock %}  
+
+      {% block mainbody %}
+
+       
+      <br><br><br>
+       <form method="POST" action="" class="p-50" enctype="multipart/form-data">
+        <br><br><br>
+        {% csrf_token %}
+          {{ fr.media }}
+          {{ fr.as_p }}
+         <input type="submit" value="submit">
+       </form>
+      
+
+
+      {% endblock mainbody %}  
+<br><br><br>
+<!------------------------------------Latest blog post card end---------------------------------->
+
+{% block footer %}
+
+<!------------------------------Footer start------------------------------------>
+
+  {% include "core/footer.html" %}
+
+ 
+<!-----------------------------------Footer End-------------------------------->
+
+{% endblock %}

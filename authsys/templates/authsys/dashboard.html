@@ -1,0 +1,112 @@
+{% extends "core/base.html" %}
+{% load static %}
+  <!------------------------------------------------Header---------------------------------->
+        
+      {% block navbar %}  
+
+        {% include "core/navbar.html" %}
+       
+      {% endblock %}  
+             
+      {% block title %} dashboard {% endblock %}  
+
+      {% block mainbody %}
+
+      <div class="user-dashboard pt-4">
+        <div class="container">
+          <div class="d-flex gap-40 justify-evenly solid-box-border">
+              <aside class="dashboard-sidebar">
+                
+                 <div class="sidebar-head">
+                    <h2>DASHBAORD</h2>
+                 </div><br>
+                  <ul class="sidebar-menu">
+                    <li class="sidebar-menu"><a href="#">Home</a></li>
+                    <li class="sidebar-menu"><a href="{% url 'profile' %}">Profile</a></li>
+                    <li class="sidebar-menu"><a href="{% url 'addBlog' %}">Add Post</a></li>
+                    <li class="sidebar-menu"><a href="{% url 'blog' %}">All Post</a></li>
+                 </ul>
+      
+                 <ul class="d-flex align-center social-icons">
+                              <li class="text-decoration-none"><a href="{{ user.profile.facebook_url }}" target="_blank"><i class="fas fa-brands fa-facebook-f text-dark"></i></a></li>
+                              <li class="text-decoration-none"><a href="{{ user.profile.instagram_url }}" target="_blank"><i class="fas fa-brands fa-instagram text-dark"></i></a></li>
+                              <li class="text-decoration-none"><a href="{{ user.profile.twitter_url }}" target="_blank"><i class="fas fa-brands fa-twitter text-dark"></i></a></li>
+                          </ul>  
+              </aside>
+      
+              <div class="user-main">
+      
+                <div class="main-content-align d-flex justify-between align-center">
+                  <div class="profile-icon">
+                      <ul class="d-flex justify-center align-center gap-20">
+                        
+                        {% if user.profile.profile_pic %}
+                          <li>
+                            <img src="{{ user.profile.profile_pic.url }}" class="border-50" width="80px" height="80px">
+                          </li>
+                        {% else %}
+                            <li>
+                              <img src="{% static 'core/images/user.png' %}" class="border-50" width="80px" height="80px">
+                            </li>
+                        {% endif %}
+                             
+                        
+                          
+      
+                          <li>
+                              <h3 class="author-name">Hello<span class="author">&nbsp; {{ request.user.first_name }}</span></h3>
+                              <p class="m-0"> {{ user.profile.bio }} </p>
+                          </li>
+                      </ul>
+                      {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+              {% endif %}
+                  </div>
+      
+                  <div class="searchbox">
+                     <input type="search" placeholder="Search..."> <i class="fas fa-light fa-magnifying-glass"></i>
+                  </div>    
+                </div>
+      
+      <section class="latest-post-list">
+          <div class="post-list">
+          {% if ps %}  
+            {% for post in ps %}
+              <ul class="d-flex justify-center gap-20 solid-box-border">
+                <li>
+                    <img src="{{ post.blog_image.url }}" class="img-fluid">
+                </li>
+                <li>
+                    <span class="post-date">{{ post.created_on }}</span>
+                      <h4>{{ post.title }}</h4>
+                      <p>{{ post.description | safe |slice:':100'  }}</p>
+                </li>
+ 
+                <li>
+                  <a href="{% url 'editpost' post.slug %}" class="btn-secondary">Edit</a>
+                  {% if request.user.is_superuser %}
+                    <form action="{% url 'DeletePost' post.slug %}" method="POST">
+                      {% csrf_token %}
+                      <input type="submit" class="btn-danger" Value="Delete">
+                    </form>
+                  {% endif %}
+              </li>
+ 
+      
+              </ul>
+            {% endfor %}  
+          {% else %}
+              <h3>No Post added</h3>
+          {% endif %}
+            
+      
+          </div>
+      </section>
+<br>
+        
+      {% endblock mainbody %}  
+
